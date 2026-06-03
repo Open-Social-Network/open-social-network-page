@@ -1,0 +1,27 @@
+{
+  "protocol": "opensocial",
+  "version": "0.1",
+  "author": "founder@opensocial.local",
+  "posts": [
+    {
+      "id": "post_001",
+      "author": "founder@opensocial.local",
+      "createdAt": "2026-06-03T12:00:00.000Z",
+      "content": "This is a sovereign OpenSocial page. The profile and feed are static JSON files, and every post is signed.",
+      "signature": {
+        "alg": "ES256",
+        "value": "Dk2eqcc8vtUI7TqjZgAEq-9FlhX2SiroHdrRfN4-hLwheA6RhD7Q9vyteab_ZMYYPSidbWLYBDH57ZBUhDIcMQ"
+      }
+    },
+    {
+      "id": "post_002",
+      "author": "founder@opensocial.local",
+      "createdAt": "2026-06-03T12:10:00.000Z",
+      "content": "An aggregator can read this page, verify the signatures, and render the feed without owning the identity.",
+      "signature": {
+        "alg": "ES256",
+        "value": "YxB9ToC_H5__seJO6ls7JvepDzcRSfMX7Xhh9qphyp6m9FvhQgxwAGMhVbrTSR-dgRQOyyep5wj81s7andNPgA"
+      }
+    }
+  ]
+}

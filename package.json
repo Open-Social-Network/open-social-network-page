@@ -1,0 +1,21 @@
+{
+  "name": "opensocial-page",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Official sovereign page template for publishing an OpenSocial identity and signed feed.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Open-Social-Organization/opensocial-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Open-Social-Organization/opensocial-page/issues"
+  },
+  "homepage": "https://github.com/Open-Social-Organization/opensocial-page#readme",
+  "scripts": {
+    "generate": "node scripts/generate-page.mjs",
+    "validate": "node scripts/validate-page.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}
