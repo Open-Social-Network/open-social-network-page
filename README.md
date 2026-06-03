@@ -6,7 +6,9 @@
 
 Open Social Network Page is the official sovereign page template for Open Social Network.
 
-It lets a person publish an identity and feed as ordinary static files:
+It is a simple social page you can host anywhere static files work.
+
+It lets a person publish a page, posts, and verification data as ordinary static files:
 
 - `profile.json`
 - `feed.json`
@@ -22,9 +24,9 @@ Open Social Network Page is a starter kit for owning your social presence.
 It creates:
 
 1. a visible profile page
-2. a `profile.json` identity file
-3. a `feed.json` signed post feed
-4. a `/.well-known/open-social-network.json` discovery file
+2. signed posts
+3. public files that any aggregator can read
+4. technical files for verification
 
 An Open Social Network aggregator can read these files and verify that the posts came from this identity.
 
@@ -105,13 +107,15 @@ open-social-network-page/
 
 ## Quick Start
 
-The easiest path is the official CLI:
+The easiest path for most users is Open Social Network Web. It can create a page in the browser and export files you can host anywhere.
+
+The terminal path is the official CLI:
 
 ```bash
 npx open-social-network
 ```
 
-It guides you through identity creation, signing, validation, preview, and free deployment.
+It guides you through page creation, posting, checking, previewing, and publishing.
 
 ## Manual Template Flow
 
@@ -132,17 +136,15 @@ Open `http://127.0.0.1:4173/`.
 3. Run `npm run generate`.
 4. Run `npm run validate`.
 5. Run `npm run serve` to preview locally.
-6. Publish the `public/` directory to a static host.
+6. Publish the `public/` directory to any static host.
 
 The generated public files are safe to deploy. The generated private key is not.
 
 ## Files You Should Understand
 
 - `page.config.json` - your editable profile and post source
-- `public/profile.json` - public identity file
-- `public/feed.json` - public signed feed
-- `public/.well-known/open-social-network.json` - discovery file
-- `private/identity.private.jwk.json` - private signing key, never publish this
+- `public/` - safe files you can host anywhere
+- `private/identity.private.jwk.json` - the file that proves the page is yours; never publish this
 
 ## Private Keys
 
@@ -160,11 +162,13 @@ The public key is written into `public/profile.json`, and posts in `public/feed.
 
 Publish the contents of `public/` to any static host.
 
-Recommended first deployment targets:
+Example deployment targets:
 
 - GitHub Pages
 - Cloudflare Pages
 - Netlify
+- Vercel
+- S3-compatible hosting
 - any static web server
 
 After deployment, update `baseUrl` in `page.config.json`, regenerate the files, validate them, and publish again.

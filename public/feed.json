@@ -7,20 +7,20 @@
       "id": "post_001",
       "author": "founder@open-social-network.local",
       "createdAt": "2026-06-03T12:00:00.000Z",
-      "content": "This is a sovereign Open Social Network page. The profile and feed are static JSON files, and every post is signed.",
+      "content": "This is my Open Social Network page. I can write here and host it anywhere.",
       "signature": {
         "alg": "ES256",
-        "value": "o-0vAxSmOQdG3WtQhLNr1Dm7E8QV53jZuTZtUteajxRqQoHIjnXyF9CduyzEWHTnfcWC1PPWYOSH8cdTnc3hYQ"
+        "value": "AB4Dz6k2Ypheb58lDwaQpPWJ8jTUCDF047OzfXITEhTCqvV-F2eqVB4qTT9QguMxtrhzSdsKQe-oPpR55R-IdA"
       }
     },
     {
       "id": "post_002",
       "author": "founder@open-social-network.local",
       "createdAt": "2026-06-03T12:10:00.000Z",
-      "content": "An aggregator can read this page, verify the signatures, and render the feed without owning the identity.",
+      "content": "Any compatible aggregator can read this page and show my posts without owning my identity.",
       "signature": {
         "alg": "ES256",
-        "value": "OKHgRXaQomN5tQihA5qyGdqQZ5bRg3HJZf5qpDmP8KNDrK2v-LOldKfe-hhhjLlm-98naEIA8DZU9arCVC_MKQ"
+        "value": "bqhADMDKL9upEDJSEh5yWLdIhsIgs84ONlB59mbbnysqViw_svDX4Z5l7Tp7qhwROnaMA9uQOsTurlrIjTYkLg"
       }
     }
   ]
