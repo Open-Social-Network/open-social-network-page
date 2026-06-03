@@ -105,6 +105,16 @@ opensocial-page/
 
 ## Quick Start
 
+The easiest path is the official CLI:
+
+```bash
+npx opensocial
+```
+
+It guides you through identity creation, signing, validation, preview, and free deployment.
+
+## Manual Template Flow
+
 Edit `page.config.json`, then generate signed OpenSocial files:
 
 ```bash
@@ -161,6 +171,7 @@ After deployment, update `baseUrl` in `page.config.json`, regenerate the files, 
 
 ## Related Repositories
 
+- [`opensocial-cli`](https://github.com/Open-Social-Organization/opensocial-cli) - guided publishing for real sovereign profiles
 - [`opensocial-core`](https://github.com/Open-Social-Organization/opensocial-core) - protocol primitives, schemas, and specification
 - [`opensocial-web`](https://github.com/Open-Social-Organization/opensocial-web) - the official web aggregator
 
