@@ -1,32 +1,32 @@
 <p align="center">
-  <img src="./assets/open-social-logo.png" width="96" alt="OpenSocial logo" />
+  <img src="./assets/open-social-network-logo.png" width="96" alt="Open Social Network logo" />
 </p>
 
-# OpenSocial Page
+# Open Social Network Page
 
-OpenSocial Page is the official sovereign page template for OpenSocial.
+Open Social Network Page is the official sovereign page template for Open Social Network.
 
 It lets a person publish an identity and feed as ordinary static files:
 
 - `profile.json`
 - `feed.json`
-- `/.well-known/opensocial.json`
+- `/.well-known/open-social-network.json`
 - a human-readable profile page
 
 The page can be hosted on GitHub Pages, Cloudflare Pages, Netlify, a VPS, a personal server, or any static hosting provider.
 
 ## In One Minute
 
-OpenSocial Page is a starter kit for owning your social presence.
+Open Social Network Page is a starter kit for owning your social presence.
 
 It creates:
 
 1. a visible profile page
 2. a `profile.json` identity file
 3. a `feed.json` signed post feed
-4. a `/.well-known/opensocial.json` discovery file
+4. a `/.well-known/open-social-network.json` discovery file
 
-An OpenSocial aggregator can read these files and verify that the posts came from this identity.
+An Open Social Network aggregator can read these files and verify that the posts came from this identity.
 
 ## Your Social Identity as a Page on the Internet
 
@@ -36,7 +36,7 @@ You can own a domain. You can publish a website. You can send email across provi
 
 But social media is still mostly platform-owned. Your handle, audience, posts, and reputation are usually locked inside someone else's product.
 
-OpenSocial Page changes the starting point:
+Open Social Network Page changes the starting point:
 
 Your profile is yours.
 
@@ -48,7 +48,7 @@ Aggregators can read and display your page, but they do not own it.
 
 ## Why This Matters
 
-OpenSocial is built around a simple idea: a social profile should be a page on the internet, not a row inside a platform database.
+Open Social Network is built around a simple idea: a social profile should be a page on the internet, not a row inside a platform database.
 
 This template makes that idea real. It gives a user a sovereign page that aggregators can read, verify, and display without owning the user's identity or audience.
 
@@ -86,11 +86,11 @@ For developers:
 ## What Is Included
 
 ```text
-opensocial-page/
+open-social-network-page/
 ├── page.config.json
 ├── public/
 │   ├── .well-known/
-│   │   └── opensocial.json
+│   │   └── open-social-network.json
 │   ├── assets/
 │   ├── feed.json
 │   ├── index.html
@@ -108,14 +108,14 @@ opensocial-page/
 The easiest path is the official CLI:
 
 ```bash
-npx opensocial
+npx open-social-network
 ```
 
 It guides you through identity creation, signing, validation, preview, and free deployment.
 
 ## Manual Template Flow
 
-Edit `page.config.json`, then generate signed OpenSocial files:
+Edit `page.config.json`, then generate signed Open Social Network files:
 
 ```bash
 npm run generate
@@ -141,7 +141,7 @@ The generated public files are safe to deploy. The generated private key is not.
 - `page.config.json` - your editable profile and post source
 - `public/profile.json` - public identity file
 - `public/feed.json` - public signed feed
-- `public/.well-known/opensocial.json` - discovery file
+- `public/.well-known/open-social-network.json` - discovery file
 - `private/identity.private.jwk.json` - private signing key, never publish this
 
 ## Private Keys
@@ -171,12 +171,12 @@ After deployment, update `baseUrl` in `page.config.json`, regenerate the files, 
 
 ## Related Repositories
 
-- [`opensocial-cli`](https://github.com/Open-Social-Organization/opensocial-cli) - guided publishing for real sovereign profiles
-- [`opensocial-core`](https://github.com/Open-Social-Organization/opensocial-core) - protocol primitives, schemas, and specification
-- [`opensocial-web`](https://github.com/Open-Social-Organization/opensocial-web) - the official web aggregator
+- [`open-social-network-cli`](https://github.com/Open-Social-Network/open-social-network-cli) - guided publishing for real sovereign profiles
+- [`open-social-network-core`](https://github.com/Open-Social-Network/open-social-network-core) - protocol primitives, schemas, and specification
+- [`open-social-network-web`](https://github.com/Open-Social-Network/open-social-network-web) - the official web aggregator
 
 ## Status
 
-OpenSocial Page is early alpha. The current goal is to make sovereign profile publishing simple, inspectable, and compatible with the OpenSocial v0.1 protocol.
+Open Social Network Page is early alpha. The current goal is to make sovereign profile publishing simple, inspectable, and compatible with the Open Social Network v0.1 protocol.
 
 This repository is the smallest practical version of a much larger vision: social identity as open internet infrastructure.

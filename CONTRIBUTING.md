@@ -1,6 +1,6 @@
-# Contributing to OpenSocial Page
+# Contributing to Open Social Network Page
 
-OpenSocial Page should make sovereign publishing simple and safe.
+Open Social Network Page should make sovereign publishing simple and safe.
 
 ## Principles
 
@@ -25,4 +25,4 @@ Pull requests should include:
 - a concise explanation of the user impact
 - validation output
 - screenshots for visible page changes
-- notes on compatibility with OpenSocial v0.1
+- notes on compatibility with Open Social Network v0.1

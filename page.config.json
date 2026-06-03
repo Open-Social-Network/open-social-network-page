@@ -1,14 +1,14 @@
 {
-  "handle": "founder@opensocial.local",
-  "name": "OpenSocial Founder",
-  "bio": "Publishing a sovereign OpenSocial page on the open web.",
-  "website": "https://opensocial.dev",
+  "handle": "founder@open-social-network.local",
+  "name": "Open Social Network Founder",
+  "bio": "Publishing a sovereign Open Social Network page on the open web.",
+  "website": "https://open-social-network.dev",
   "baseUrl": "",
   "posts": [
     {
       "id": "post_001",
       "createdAt": "2026-06-03T12:00:00.000Z",
-      "content": "This is a sovereign OpenSocial page. The profile and feed are static JSON files, and every post is signed."
+      "content": "This is a sovereign Open Social Network page. The profile and feed are static JSON files, and every post is signed."
     },
     {
       "id": "post_002",

@@ -22,7 +22,7 @@ const profileUrl = baseUrl ? `${baseUrl}/profile.json` : '/profile.json';
 const feedUrl = baseUrl ? `${baseUrl}/feed.json` : '/feed.json';
 
 const profile = {
-  protocol: 'opensocial',
+  protocol: 'open-social-network',
   version: '0.1',
   handle: config.handle,
   name: config.name,
@@ -54,14 +54,14 @@ for (const post of config.posts) {
 }
 
 const feed = {
-  protocol: 'opensocial',
+  protocol: 'open-social-network',
   version: '0.1',
   author: config.handle,
   posts,
 };
 
 await writeJson('public/profile.json', profile);
-await writeJson('public/.well-known/opensocial.json', profile);
+await writeJson('public/.well-known/open-social-network.json', profile);
 await writeJson('public/feed.json', feed);
 await writeJson('private/identity.private.jwk.json', privateJwk);
 

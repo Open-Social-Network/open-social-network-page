@@ -22,5 +22,5 @@ createServer((request, response) => {
   response.setHeader('Content-Type', contentTypes[extension] || 'application/octet-stream');
   createReadStream(finalPath).pipe(response);
 }).listen(port, '127.0.0.1', () => {
-  console.log(`OpenSocial page running at http://127.0.0.1:${port}/`);
+  console.log(`Open Social Network page running at http://127.0.0.1:${port}/`);
 });

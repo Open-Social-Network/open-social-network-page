@@ -3,20 +3,20 @@ import { webcrypto } from 'node:crypto';
 
 const encoder = new TextEncoder();
 const profile = JSON.parse(await readFile('public/profile.json', 'utf8'));
-const discovery = JSON.parse(await readFile('public/.well-known/opensocial.json', 'utf8'));
+const discovery = JSON.parse(await readFile('public/.well-known/open-social-network.json', 'utf8'));
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const failures = [];
 
-if (profile.protocol !== 'opensocial' || profile.version !== '0.1') {
-  failures.push('profile.json must declare OpenSocial protocol version 0.1');
+if (profile.protocol !== 'open-social-network' || profile.version !== '0.1') {
+  failures.push('profile.json must declare Open Social Network protocol version 0.1');
 }
 
 if (JSON.stringify(profile) !== JSON.stringify(discovery)) {
-  failures.push('.well-known/opensocial.json must match profile.json');
+  failures.push('.well-known/open-social-network.json must match profile.json');
 }
 
-if (feed.protocol !== 'opensocial' || feed.version !== '0.1') {
-  failures.push('feed.json must declare OpenSocial protocol version 0.1');
+if (feed.protocol !== 'open-social-network' || feed.version !== '0.1') {
+  failures.push('feed.json must declare Open Social Network protocol version 0.1');
 }
 
 if (feed.author !== profile.handle) {
@@ -34,7 +34,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${feed.posts.length} signed OpenSocial posts for ${profile.handle}`);
+console.log(`Validated ${feed.posts.length} signed Open Social Network posts for ${profile.handle}`);
 
 async function verifyPost(post, identity) {
   if (post.author !== identity.handle || post.signature?.alg !== 'ES256') {

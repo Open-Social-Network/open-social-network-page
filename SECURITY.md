@@ -1,6 +1,6 @@
 # Security Policy
 
-OpenSocial Page is early alpha software.
+Open Social Network Page is early alpha software.
 
 ## Private Key Safety
 
