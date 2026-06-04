@@ -26,9 +26,10 @@ It creates:
 1. a visible profile page
 2. signed posts
 3. a public action inbox path for likes, dislikes, and comments
-4. an encrypted message inbox path
-5. public files that any aggregator can read
-6. technical files for verification
+4. a portable follow list that the page can show publicly
+5. an encrypted message inbox path
+6. public files that any aggregator can read
+7. technical files for verification
 
 An Open Social Network aggregator can read these files and verify that the posts came from this identity.
 
@@ -63,6 +64,7 @@ This template makes that idea real. It gives a user a sovereign page that aggreg
 - a signed `feed.json`
 - a `.well-known` discovery file
 - public action files for portable likes, dislikes, and comments
+- a public follow list shown on the page
 - an encrypted message inbox file
 - local key generation
 - validation that verifies every post signature
@@ -104,6 +106,8 @@ open-social-network-page/
 │   │   ├── actions/
 │   │   │   ├── index.json
 │   │   │   └── inbox/index.json
+│   │   ├── follows/
+│   │   │   └── index.json
 │   │   └── messages/
 │   │       └── inbox/index.json
 │   ├── page.js

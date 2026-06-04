@@ -15,6 +15,7 @@ const messageAlgorithm = {
 await mkdir('public/.well-known', { recursive: true });
 await mkdir('public/opensocial/actions', { recursive: true });
 await mkdir('public/opensocial/actions/inbox', { recursive: true });
+await mkdir('public/opensocial/follows', { recursive: true });
 await mkdir('public/opensocial/messages/inbox', { recursive: true });
 await mkdir('private', { recursive: true });
 
@@ -98,6 +99,12 @@ const actionInbox = {
   owner: config.handle,
   actions: [],
 };
+const followList = {
+  protocol: 'open-social-network',
+  version: '0.1',
+  owner: config.handle,
+  follows: [],
+};
 const messageLog = {
   protocol: 'open-social-network',
   version: '0.1',
@@ -110,6 +117,7 @@ await writeJson('public/.well-known/open-social-network.json', profile);
 await writeJson('public/feed.json', feed);
 await writeJson('public/opensocial/actions/index.json', actionLog);
 await writeJson('public/opensocial/actions/inbox/index.json', actionInbox);
+await writeJson('public/opensocial/follows/index.json', followList);
 await writeJson('public/opensocial/messages/inbox/index.json', messageLog);
 
 async function signPost(post, privateKey) {

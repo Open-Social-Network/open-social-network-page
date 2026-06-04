@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { renderPostSocialSummary, summarizePostActions } from '../public/page-social.js';
+import * as pageSocial from '../public/page-social.js';
+
+const { renderPostSocialSummary, summarizePostActions } = pageSocial;
 
 test('summarizes public actions for one post', () => {
   const post = {
@@ -85,6 +87,58 @@ test('uses the latest reaction from each actor', () => {
 
   assert.equal(summarizePostActions(post, actionInbox).likes, 0);
   assert.equal(summarizePostActions(post, actionInbox).dislikes, 1);
+});
+
+test('renders portable follows as profile links', () => {
+  assert.equal(typeof pageSocial.renderProfileFollows, 'function');
+  const html = pageSocial.renderProfileFollows(
+    {
+      protocol: 'open-social-network',
+      version: '0.1',
+      owner: 'owner@example.test',
+      follows: [
+        {
+          profile: 'https://ada.example.test/profile.json',
+          handle: 'ada@example.test',
+        },
+        {
+          profile: 'https://relay.example.test/profile.json',
+        },
+        {
+          profile: 'https://ada.example.test/profile.json',
+          handle: 'duplicate@example.test',
+        },
+      ],
+    },
+    'owner@example.test',
+  );
+
+  assert.match(html, /2 pages/);
+  assert.match(html, /href="https:\/\/ada.example.test\/profile.json"/);
+  assert.match(html, />ada@example.test</);
+  assert.match(html, />relay.example.test</);
+  assert.doesNotMatch(html, /duplicate@example.test/);
+});
+
+test('hides follow entries when the list owner does not match the profile', () => {
+  assert.equal(typeof pageSocial.renderProfileFollows, 'function');
+  const html = pageSocial.renderProfileFollows(
+    {
+      protocol: 'open-social-network',
+      version: '0.1',
+      owner: 'other@example.test',
+      follows: [
+        {
+          profile: 'https://ada.example.test/profile.json',
+          handle: 'ada@example.test',
+        },
+      ],
+    },
+    'owner@example.test',
+  );
+
+  assert.match(html, /Not following anyone yet/);
+  assert.doesNotMatch(html, /ada@example.test/);
 });
 
 function action(id, kind, actor, target, extra) {

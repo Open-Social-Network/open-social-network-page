@@ -7,6 +7,7 @@ const discovery = JSON.parse(await readFile('public/.well-known/open-social-netw
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const actionLog = JSON.parse(await readFile('public/opensocial/actions/index.json', 'utf8'));
 const actionInbox = JSON.parse(await readFile('public/opensocial/actions/inbox/index.json', 'utf8'));
+const followList = JSON.parse(await readFile('public/opensocial/follows/index.json', 'utf8'));
 const messageLog = JSON.parse(await readFile('public/opensocial/messages/inbox/index.json', 'utf8'));
 const styles = await readFile('public/styles.css', 'utf8');
 const failures = [];
@@ -59,6 +60,18 @@ for (const action of actionInbox.actions || []) {
   if (action?.target?.author !== profile.handle) {
     failures.push(`action ${action?.id || '(missing id)'} must target this page owner`);
   }
+}
+
+if (followList.protocol !== 'open-social-network' || followList.version !== '0.1') {
+  failures.push('follow list must declare Open Social Network protocol version 0.1');
+}
+
+if (followList.owner !== profile.handle) {
+  failures.push('follow list owner must match profile handle');
+}
+
+if (!Array.isArray(followList.follows)) {
+  failures.push('follow list follows must be an array');
 }
 
 if (messageLog.protocol !== 'open-social-network' || messageLog.version !== '0.1') {

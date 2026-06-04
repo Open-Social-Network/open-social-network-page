@@ -80,7 +80,8 @@ a {
 }
 
 .profile-hero,
-.feed-section {
+.feed-section,
+.follow-section {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(13, 20, 36, 0.94);
@@ -164,8 +165,13 @@ a {
   text-decoration: none;
 }
 
-.feed-section {
+.feed-section,
+.follow-section {
   padding: 26px;
+}
+
+.follow-section {
+  margin-top: 18px;
 }
 
 .section-header {
@@ -189,6 +195,50 @@ a {
 .post-list {
   display: grid;
   gap: 12px;
+}
+
+.follow-count {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 780;
+}
+
+.follow-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.follow-card {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(128, 153, 193, 0.22);
+  border-radius: 8px;
+  background: rgba(10, 16, 29, 0.72);
+  color: inherit;
+  text-decoration: none;
+}
+
+.follow-card:hover {
+  border-color: var(--cyan);
+}
+
+.follow-card strong,
+.follow-card span {
+  overflow-wrap: anywhere;
+}
+
+.follow-card strong {
+  color: var(--ink-strong);
+  font-size: 0.94rem;
+}
+
+.follow-card span {
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .post-card {
@@ -343,6 +393,7 @@ a {
   }
 
   .feed-section,
+  .follow-section,
   .post-card {
     padding: 18px;
   }
