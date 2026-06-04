@@ -57,9 +57,15 @@ test('renders social action counts and escapes public comments', () => {
   };
   const html = renderPostSocialSummary(summary);
 
+  assert.match(html, /Activity/);
+  assert.match(html, /aria-label="Public activity"/);
+  assert.match(html, /class="social-icon social-icon-like"/);
+  assert.match(html, /class="social-icon social-icon-dislike"/);
+  assert.match(html, /class="social-icon social-icon-comment"/);
   assert.match(html, /2 likes/);
   assert.match(html, /1 dislike/);
   assert.match(html, /1 comment/);
+  assert.match(html, /Jun/);
   assert.match(html, /&lt;script&gt;alert\(&quot;x&quot;\)&lt;\/script&gt;/);
   assert.doesNotMatch(html, /<script>/);
 });
