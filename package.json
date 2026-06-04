@@ -15,6 +15,7 @@
   "homepage": "https://github.com/Open-Social-Network/open-social-network-page#readme",
   "scripts": {
     "generate": "node scripts/generate-page.mjs",
+    "test": "node --test scripts/*.test.mjs",
     "validate": "node scripts/validate-page.mjs",
     "serve": "node scripts/serve.mjs"
   }

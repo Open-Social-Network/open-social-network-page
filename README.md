@@ -102,7 +102,8 @@ open-social-network-page/
 │   ├── index.html
 │   ├── opensocial/
 │   │   ├── actions/
-│   │   │   └── index.json
+│   │   │   ├── index.json
+│   │   │   └── inbox/index.json
 │   │   └── messages/
 │   │       └── inbox/index.json
 │   ├── page.js

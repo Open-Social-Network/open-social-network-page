@@ -6,6 +6,7 @@ const profile = JSON.parse(await readFile('public/profile.json', 'utf8'));
 const discovery = JSON.parse(await readFile('public/.well-known/open-social-network.json', 'utf8'));
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const actionLog = JSON.parse(await readFile('public/opensocial/actions/index.json', 'utf8'));
+const actionInbox = JSON.parse(await readFile('public/opensocial/actions/inbox/index.json', 'utf8'));
 const messageLog = JSON.parse(await readFile('public/opensocial/messages/inbox/index.json', 'utf8'));
 const styles = await readFile('public/styles.css', 'utf8');
 const failures = [];
@@ -40,6 +41,24 @@ if (actionLog.actor !== profile.handle) {
 
 if (!Array.isArray(actionLog.actions)) {
   failures.push('action log actions must be an array');
+}
+
+if (actionInbox.protocol !== 'open-social-network' || actionInbox.version !== '0.1') {
+  failures.push('action inbox must declare Open Social Network protocol version 0.1');
+}
+
+if (actionInbox.owner !== profile.handle) {
+  failures.push('action inbox owner must match profile handle');
+}
+
+if (!Array.isArray(actionInbox.actions)) {
+  failures.push('action inbox actions must be an array');
+}
+
+for (const action of actionInbox.actions || []) {
+  if (action?.target?.author !== profile.handle) {
+    failures.push(`action ${action?.id || '(missing id)'} must target this page owner`);
+  }
 }
 
 if (messageLog.protocol !== 'open-social-network' || messageLog.version !== '0.1') {
