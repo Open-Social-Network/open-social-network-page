@@ -161,6 +161,8 @@ The generated public files are safe to deploy. The generated private key is not.
 - `private/identity.private.jwk.json` - the file that proves the page is yours; never publish this
 - `private/messages.private.jwk.json` - the file that decrypts messages sent to the page; never publish this
 
+If `public/opensocial/messages/inbox/index.json` already contains received encrypted message envelopes, `npm run generate` keeps them. Regenerating the page should not erase messages that were already delivered to the public encrypted inbox.
+
 ## Private Keys
 
 The generator writes a private key to:

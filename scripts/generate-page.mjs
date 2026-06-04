@@ -87,6 +87,10 @@ const feed = {
   author: config.handle,
   posts,
 };
+const existingMessageLog = await loadExistingMessageLog(
+  'public/opensocial/messages/inbox/index.json',
+  config.handle,
+);
 const actionLog = {
   protocol: 'open-social-network',
   version: '0.1',
@@ -109,7 +113,7 @@ const messageLog = {
   protocol: 'open-social-network',
   version: '0.1',
   owner: config.handle,
-  messages: [],
+  messages: existingMessageLog?.messages ?? [],
 };
 
 await writeJson('public/profile.json', profile);
@@ -172,6 +176,29 @@ async function fileExists(path) {
     return true;
   } catch {
     return false;
+  }
+}
+
+async function loadExistingMessageLog(path, owner) {
+  if (!(await fileExists(path))) {
+    return null;
+  }
+
+  try {
+    const messageLog = JSON.parse(await readFile(path, 'utf8'));
+
+    if (
+      messageLog.protocol !== 'open-social-network' ||
+      messageLog.version !== '0.1' ||
+      messageLog.owner !== owner ||
+      !Array.isArray(messageLog.messages)
+    ) {
+      return null;
+    }
+
+    return messageLog;
+  } catch {
+    return null;
   }
 }
 
