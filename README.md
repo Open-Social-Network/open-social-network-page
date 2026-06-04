@@ -195,7 +195,7 @@ Open Social Network Page is early alpha. The current goal is to make sovereign p
 
 This repository is the smallest practical version of a much larger vision: social identity as open internet infrastructure.
 
-## Relationship To Existing Decentralized Social Platforms
+## How Open Social Network Differs From Existing Decentralized Social Platforms
 
 Open Social Network does not claim that decentralized social media starts here.
 

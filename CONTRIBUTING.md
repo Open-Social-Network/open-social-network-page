@@ -26,3 +26,9 @@ Pull requests should include:
 - validation output
 - screenshots for visible page changes
 - notes on compatibility with Open Social Network v0.1
+
+## Project Context
+
+Open Social Network is not trying to erase the work of Mastodon, ActivityPub, Nostr, Bluesky/AT Protocol, Diaspora, Matrix, or the broader fediverse. Those projects have already moved open social infrastructure forward in serious ways.
+
+This project explores a smaller, web-native primitive: a profile that belongs to its publisher, signed public records that can be read by any compatible aggregator, and publishing that works on ordinary static hosting. Contributions should keep that direction clear for both developers and non-technical users.
