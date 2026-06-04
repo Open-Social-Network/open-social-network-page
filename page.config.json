@@ -8,12 +8,12 @@
     {
       "id": "post_001",
       "createdAt": "2026-06-03T12:00:00.000Z",
-      "content": "This is a sovereign Open Social Network page. The profile and feed are static JSON files, and every post is signed."
+      "content": "This page belongs to its publisher. Posts can move across hosts, apps, and aggregators without becoming a platform account."
     },
     {
       "id": "post_002",
       "createdAt": "2026-06-03T12:10:00.000Z",
-      "content": "An aggregator can read this page, verify the signatures, and render the feed without owning the identity."
+      "content": "Follow, read, and share from any compatible Open Social Network app. The page remains the source of truth."
     }
   ]
 }

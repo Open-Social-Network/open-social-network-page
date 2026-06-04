@@ -159,7 +159,7 @@ function renderPosts(posts, actionInbox) {
           <p>${escapeHtml(post.content)}</p>
           ${renderPostSocialSummary(summarizePostActions(post, actionInbox))}
           <details class="technical-details post-details">
-            <summary>Signature</summary>
+            <summary>Verification</summary>
             <code>${escapeHtml(post.signature.value.slice(0, 22))}...</code>
           </details>
         </article>

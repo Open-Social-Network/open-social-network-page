@@ -7,20 +7,20 @@
       "id": "post_001",
       "author": "founder@open-social-network.local",
       "createdAt": "2026-06-03T12:00:00.000Z",
-      "content": "This is a sovereign Open Social Network page. The profile and feed are static JSON files, and every post is signed.",
+      "content": "This page belongs to its publisher. Posts can move across hosts, apps, and aggregators without becoming a platform account.",
       "signature": {
         "alg": "ES256",
-        "value": "0_EVTgQT1fWW_U0U4OSA2zZjMGdFGUekBxMv57UjYMEMAU-4fd_C-h0v_jNwnkU9CLVtL6d8bmEzJ1BfCr1RXA"
+        "value": "17M6jVAy5eE4iF5bWBoHj-UBQ5uqwyGBTOlrb0J6v10g5vbGqsdyVpLwRlKbIKv4zZqFVjLWpiCM9-_Eb0vwpA"
       }
     },
     {
       "id": "post_002",
       "author": "founder@open-social-network.local",
       "createdAt": "2026-06-03T12:10:00.000Z",
-      "content": "An aggregator can read this page, verify the signatures, and render the feed without owning the identity.",
+      "content": "Follow, read, and share from any compatible Open Social Network app. The page remains the source of truth.",
       "signature": {
         "alg": "ES256",
-        "value": "lLf6Ljeq4Kiqv_SljW-WDJ21TsifLBKkJCkTowYyhowfuQSi6MYV69LLbPOKn6z_R_gMxqwoR5zIpM2yWMeurg"
+        "value": "oPGZjDaVcBzIAlDBWy20ad5yT6tG6VylqeIHDZswwULG08ODNBiKRoomV1YuR4F3tWUWiBoQWxsnTaRoCC4xCQ"
       }
     }
   ]

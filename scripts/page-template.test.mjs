@@ -16,3 +16,12 @@ test('page runtime loads the portable follow list', async () => {
   assert.match(pageScript, /fetchOptionalJson\('\.\/opensocial\/follows\/index\.json'/);
   assert.match(pageScript, /renderProfileFollows\(followList, profile\.handle\)/);
 });
+
+test('page copy keeps protocol details behind user-facing labels', async () => {
+  const config = await readFile('page.config.json', 'utf8');
+  const pageScript = await readFile('public/page.js', 'utf8');
+
+  assert.doesNotMatch(config, /static JSON files/i);
+  assert.doesNotMatch(config, /signatures/i);
+  assert.match(pageScript, /<summary>Verification<\/summary>/);
+});
