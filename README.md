@@ -153,7 +153,7 @@ The generated public files are safe to deploy. The generated private key is not.
 ## Files You Should Understand
 
 - `page.config.json` - your editable profile and post source
-- `public/` - safe files you can host anywhere, including the public action log, public action inbox path, and encrypted message inbox
+- `public/` - safe files you can host anywhere, including the actor-owned public action log, public action inbox path, and encrypted message inbox
 - `private/identity.private.jwk.json` - the file that proves the page is yours; never publish this
 - `private/messages.private.jwk.json` - the file that decrypts messages sent to the page; never publish this
 
@@ -178,6 +178,8 @@ The public key is written into `public/profile.json`, and posts in `public/feed.
 ## Deploy
 
 Publish the contents of `public/` to any static host.
+
+When only likes, dislikes, or comments change, compatible tools can update the smaller actor-owned action log at `public/opensocial/actions/index.json` instead of republishing the whole page. Aggregators can read that file from followed profiles and verify each action signature.
 
 Example deployment targets:
 
