@@ -34,6 +34,9 @@ const messagePublicJwk = publicMessageJwkFromPrivate(messagePrivateJwk);
 const baseUrl = String(config.baseUrl || '').replace(/\/$/u, '');
 const profileUrl = baseUrl ? `${baseUrl}/profile.json` : '/profile.json';
 const feedUrl = baseUrl ? `${baseUrl}/feed.json` : '/feed.json';
+const actionsUrl = baseUrl
+  ? `${baseUrl}/opensocial/actions/inbox/index.json`
+  : '/opensocial/actions/inbox/index.json';
 const messagesUrl = baseUrl
   ? `${baseUrl}/opensocial/messages/inbox/index.json`
   : '/opensocial/messages/inbox/index.json';
@@ -56,6 +59,7 @@ const profile = {
   endpoints: {
     profile: profileUrl,
     feed: feedUrl,
+    actions: actionsUrl,
     messages: messagesUrl,
   },
 };

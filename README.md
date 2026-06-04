@@ -25,8 +25,10 @@ It creates:
 
 1. a visible profile page
 2. signed posts
-3. public files that any aggregator can read
-4. technical files for verification
+3. a public action inbox path for likes, dislikes, and comments
+4. an encrypted message inbox path
+5. public files that any aggregator can read
+6. technical files for verification
 
 An Open Social Network aggregator can read these files and verify that the posts came from this identity.
 
@@ -60,6 +62,8 @@ This template makes that idea real. It gives a user a sovereign page that aggreg
 - a machine-readable `profile.json`
 - a signed `feed.json`
 - a `.well-known` discovery file
+- public action files for portable likes, dislikes, and comments
+- an encrypted message inbox file
 - local key generation
 - validation that verifies every post signature
 - a deployment model that works with ordinary static hosting
@@ -97,8 +101,10 @@ open-social-network-page/
 │   ├── feed.json
 │   ├── index.html
 │   ├── opensocial/
-│   │   ├── actions/index.json
-│   │   └── messages/inbox/index.json
+│   │   ├── actions/
+│   │   │   └── index.json
+│   │   └── messages/
+│   │       └── inbox/index.json
 │   ├── page.js
 │   ├── profile.json
 │   └── styles.css
@@ -146,7 +152,7 @@ The generated public files are safe to deploy. The generated private key is not.
 ## Files You Should Understand
 
 - `page.config.json` - your editable profile and post source
-- `public/` - safe files you can host anywhere, including the public action log and encrypted message inbox
+- `public/` - safe files you can host anywhere, including the public action log, public action inbox path, and encrypted message inbox
 - `private/identity.private.jwk.json` - the file that proves the page is yours; never publish this
 - `private/messages.private.jwk.json` - the file that decrypts messages sent to the page; never publish this
 
