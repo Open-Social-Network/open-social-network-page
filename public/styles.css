@@ -47,7 +47,38 @@ a {
 .page-shell {
   width: min(920px, 100%);
   margin: 0 auto;
-  padding: 44px 20px 64px;
+  padding: 34px 20px 64px;
+}
+
+.banner-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 230px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 78% 34%, rgba(0, 158, 174, 0.28), transparent 14rem),
+    radial-gradient(circle at 28% 42%, rgba(87, 59, 255, 0.25), transparent 15rem),
+    linear-gradient(135deg, #ffffff 0%, #edf4ff 48%, #dfeaff 100%);
+  box-shadow: var(--shadow);
+}
+
+.banner-section::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 72px;
+  background: linear-gradient(180deg, transparent, rgba(245, 247, 251, 0.78));
+  content: "";
+}
+
+.cover-mark {
+  position: absolute;
+  right: clamp(18px, 6vw, 64px);
+  bottom: 22px;
+  width: min(260px, 48vw);
+  height: min(260px, 48vw);
+  opacity: 0.18;
+  object-fit: contain;
 }
 
 .profile-hero,
@@ -59,25 +90,30 @@ a {
 }
 
 .profile-hero {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: 128px minmax(0, 1fr);
   gap: 26px;
-  align-items: center;
-  margin-bottom: 18px;
-  padding: 30px;
+  align-items: start;
+  margin: -58px 0 18px;
+  padding: 32px 30px 28px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.92)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(239, 246, 255, 0.94)),
     var(--paper);
+  backdrop-filter: blur(18px);
 }
 
 .profile-logo {
   display: block;
-  width: 112px;
-  height: 112px;
+  width: 128px;
+  height: 128px;
+  margin-top: -70px;
   padding: 12px;
-  border: 1px solid #c8d7f4;
+  border: 4px solid #ffffff;
   border-radius: 8px;
   background: linear-gradient(135deg, #eef2ff, #e6fbfd);
+  box-shadow: 0 18px 42px rgba(37, 49, 83, 0.18);
   object-fit: contain;
 }
 
@@ -100,11 +136,11 @@ a {
 }
 
 .profile-hero h1 {
-  max-width: 12ch;
+  max-width: 13ch;
   margin-top: 8px;
   color: var(--ink-strong);
-  font-size: clamp(2.25rem, 6vw, 4.15rem);
-  line-height: 0.99;
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  line-height: 1.02;
   text-wrap: balance;
 }
 
@@ -230,15 +266,28 @@ a {
     padding: 20px 12px 36px;
   }
 
+  .banner-section {
+    min-height: 150px;
+  }
+
+  .cover-mark {
+    right: 16px;
+    bottom: 14px;
+    width: 150px;
+    height: 150px;
+  }
+
   .profile-hero {
     grid-template-columns: 1fr;
     gap: 16px;
-    padding: 20px;
+    margin-top: -34px;
+    padding: 18px 20px 22px;
   }
 
   .profile-logo {
-    width: 92px;
-    height: 92px;
+    width: 96px;
+    height: 96px;
+    margin-top: -56px;
     padding: 10px;
   }
 
