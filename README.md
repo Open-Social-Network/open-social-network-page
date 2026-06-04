@@ -96,6 +96,8 @@ open-social-network-page/
 │   ├── assets/
 │   ├── feed.json
 │   ├── index.html
+│   ├── opensocial/
+│   │   └── actions/index.json
 │   ├── page.js
 │   ├── profile.json
 │   └── styles.css
@@ -143,7 +145,7 @@ The generated public files are safe to deploy. The generated private key is not.
 ## Files You Should Understand
 
 - `page.config.json` - your editable profile and post source
-- `public/` - safe files you can host anywhere
+- `public/` - safe files you can host anywhere, including the public action log
 - `private/identity.private.jwk.json` - the file that proves the page is yours; never publish this
 
 ## Private Keys

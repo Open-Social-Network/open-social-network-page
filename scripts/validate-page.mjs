@@ -5,6 +5,7 @@ const encoder = new TextEncoder();
 const profile = JSON.parse(await readFile('public/profile.json', 'utf8'));
 const discovery = JSON.parse(await readFile('public/.well-known/open-social-network.json', 'utf8'));
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
+const actionLog = JSON.parse(await readFile('public/opensocial/actions/index.json', 'utf8'));
 const failures = [];
 
 if (profile.protocol !== 'open-social-network' || profile.version !== '0.1') {
@@ -21,6 +22,18 @@ if (feed.protocol !== 'open-social-network' || feed.version !== '0.1') {
 
 if (feed.author !== profile.handle) {
   failures.push('feed author must match profile handle');
+}
+
+if (actionLog.protocol !== 'open-social-network' || actionLog.version !== '0.1') {
+  failures.push('action log must declare Open Social Network protocol version 0.1');
+}
+
+if (actionLog.actor !== profile.handle) {
+  failures.push('action log actor must match profile handle');
+}
+
+if (!Array.isArray(actionLog.actions)) {
+  failures.push('action log actions must be an array');
 }
 
 for (const post of feed.posts || []) {

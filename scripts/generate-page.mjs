@@ -5,6 +5,7 @@ const encoder = new TextEncoder();
 const config = JSON.parse(await readFile('page.config.json', 'utf8'));
 
 await mkdir('public/.well-known', { recursive: true });
+await mkdir('public/opensocial/actions', { recursive: true });
 await mkdir('private', { recursive: true });
 
 const keyPair = await webcrypto.subtle.generateKey(
@@ -59,10 +60,17 @@ const feed = {
   author: config.handle,
   posts,
 };
+const actionLog = {
+  protocol: 'open-social-network',
+  version: '0.1',
+  actor: config.handle,
+  actions: [],
+};
 
 await writeJson('public/profile.json', profile);
 await writeJson('public/.well-known/open-social-network.json', profile);
 await writeJson('public/feed.json', feed);
+await writeJson('public/opensocial/actions/index.json', actionLog);
 await writeJson('private/identity.private.jwk.json', privateJwk);
 
 async function signPost(post, privateKey) {
