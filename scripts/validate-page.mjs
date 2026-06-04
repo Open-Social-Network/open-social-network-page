@@ -7,6 +7,7 @@ const discovery = JSON.parse(await readFile('public/.well-known/open-social-netw
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const actionLog = JSON.parse(await readFile('public/opensocial/actions/index.json', 'utf8'));
 const messageLog = JSON.parse(await readFile('public/opensocial/messages/inbox/index.json', 'utf8'));
+const styles = await readFile('public/styles.css', 'utf8');
 const failures = [];
 
 if (profile.protocol !== 'open-social-network' || profile.version !== '0.1') {
@@ -51,6 +52,10 @@ if (messageLog.owner !== profile.handle) {
 
 if (!Array.isArray(messageLog.messages)) {
   failures.push('message inbox messages must be an array');
+}
+
+if (!styles.includes('color-scheme: dark')) {
+  failures.push('page template must declare a dark color scheme');
 }
 
 for (const post of feed.posts || []) {
