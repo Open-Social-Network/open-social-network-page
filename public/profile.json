@@ -8,18 +8,29 @@
   "publicKey": {
     "alg": "ES256",
     "jwk": {
-      "key_ops": [
-        "verify"
-      ],
-      "ext": true,
       "kty": "EC",
+      "crv": "P-256",
       "x": "F_71aCKCYPzUJR6bfrhvywsWG97nLR4mNj4AImogXtw",
       "y": "28xGS8UKj0B0vVjXwiqcpIxwKuHtMSd4JsB55QVYVvM",
+      "ext": true,
+      "key_ops": [
+        "verify"
+      ]
+    }
+  },
+  "messagePublicKey": {
+    "alg": "ECDH-P256",
+    "jwk": {
+      "ext": true,
+      "kty": "EC",
+      "x": "KN_6cWFpLXBX_e5m7kSYvrQ1v9wb_B47a64W4Gi9p1U",
+      "y": "O9ntAOc-v9101OMQd6oKJKvMSLetFkDt_WLRlvpzk_0",
       "crv": "P-256"
     }
   },
   "endpoints": {
     "profile": "/profile.json",
-    "feed": "/feed.json"
+    "feed": "/feed.json",
+    "messages": "/opensocial/messages/inbox/index.json"
   }
 }

@@ -6,6 +6,7 @@ const profile = JSON.parse(await readFile('public/profile.json', 'utf8'));
 const discovery = JSON.parse(await readFile('public/.well-known/open-social-network.json', 'utf8'));
 const feed = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const actionLog = JSON.parse(await readFile('public/opensocial/actions/index.json', 'utf8'));
+const messageLog = JSON.parse(await readFile('public/opensocial/messages/inbox/index.json', 'utf8'));
 const failures = [];
 
 if (profile.protocol !== 'open-social-network' || profile.version !== '0.1') {
@@ -34,6 +35,18 @@ if (actionLog.actor !== profile.handle) {
 
 if (!Array.isArray(actionLog.actions)) {
   failures.push('action log actions must be an array');
+}
+
+if (messageLog.protocol !== 'open-social-network' || messageLog.version !== '0.1') {
+  failures.push('message inbox must declare Open Social Network protocol version 0.1');
+}
+
+if (messageLog.owner !== profile.handle) {
+  failures.push('message inbox owner must match profile handle');
+}
+
+if (!Array.isArray(messageLog.messages)) {
+  failures.push('message inbox messages must be an array');
 }
 
 for (const post of feed.posts || []) {

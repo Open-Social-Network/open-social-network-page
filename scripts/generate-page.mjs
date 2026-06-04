@@ -1,26 +1,42 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, chmod, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { webcrypto } from 'node:crypto';
 
 const encoder = new TextEncoder();
 const config = JSON.parse(await readFile('page.config.json', 'utf8'));
+const signingAlgorithm = {
+  name: 'ECDSA',
+  namedCurve: 'P-256',
+};
+const messageAlgorithm = {
+  name: 'ECDH',
+  namedCurve: 'P-256',
+};
 
 await mkdir('public/.well-known', { recursive: true });
 await mkdir('public/opensocial/actions', { recursive: true });
+await mkdir('public/opensocial/messages/inbox', { recursive: true });
 await mkdir('private', { recursive: true });
 
-const keyPair = await webcrypto.subtle.generateKey(
-  {
-    name: 'ECDSA',
-    namedCurve: 'P-256',
-  },
-  true,
+const { privateJwk, privateKey } = await loadOrCreatePrivateKey(
+  'private/identity.private.jwk.json',
+  signingAlgorithm,
   ['sign', 'verify'],
+  ['sign'],
 );
-const publicJwk = await webcrypto.subtle.exportKey('jwk', keyPair.publicKey);
-const privateJwk = await webcrypto.subtle.exportKey('jwk', keyPair.privateKey);
+const { privateJwk: messagePrivateJwk } = await loadOrCreatePrivateKey(
+  'private/messages.private.jwk.json',
+  messageAlgorithm,
+  ['deriveKey'],
+  ['deriveKey'],
+);
+const publicJwk = publicSigningJwkFromPrivate(privateJwk);
+const messagePublicJwk = publicMessageJwkFromPrivate(messagePrivateJwk);
 const baseUrl = String(config.baseUrl || '').replace(/\/$/u, '');
 const profileUrl = baseUrl ? `${baseUrl}/profile.json` : '/profile.json';
 const feedUrl = baseUrl ? `${baseUrl}/feed.json` : '/feed.json';
+const messagesUrl = baseUrl
+  ? `${baseUrl}/opensocial/messages/inbox/index.json`
+  : '/opensocial/messages/inbox/index.json';
 
 const profile = {
   protocol: 'open-social-network',
@@ -33,9 +49,14 @@ const profile = {
     alg: 'ES256',
     jwk: publicJwk,
   },
+  messagePublicKey: {
+    alg: 'ECDH-P256',
+    jwk: messagePublicJwk,
+  },
   endpoints: {
     profile: profileUrl,
     feed: feedUrl,
+    messages: messagesUrl,
   },
 };
 const posts = [];
@@ -49,7 +70,7 @@ for (const post of config.posts) {
         createdAt: post.createdAt,
         content: post.content,
       },
-      keyPair.privateKey,
+      privateKey,
     ),
   );
 }
@@ -66,12 +87,18 @@ const actionLog = {
   actor: config.handle,
   actions: [],
 };
+const messageLog = {
+  protocol: 'open-social-network',
+  version: '0.1',
+  owner: config.handle,
+  messages: [],
+};
 
 await writeJson('public/profile.json', profile);
 await writeJson('public/.well-known/open-social-network.json', profile);
 await writeJson('public/feed.json', feed);
 await writeJson('public/opensocial/actions/index.json', actionLog);
-await writeJson('private/identity.private.jwk.json', privateJwk);
+await writeJson('public/opensocial/messages/inbox/index.json', messageLog);
 
 async function signPost(post, privateKey) {
   const signature = await webcrypto.subtle.sign(
@@ -94,6 +121,62 @@ async function signPost(post, privateKey) {
 
 async function writeJson(path, value) {
   await writeFile(path, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+async function loadOrCreatePrivateKey(path, algorithm, generatedUsages, importedUsages) {
+  if (await fileExists(path)) {
+    const existingJwk = JSON.parse(await readFile(path, 'utf8'));
+    const importedPrivateKey = await webcrypto.subtle.importKey(
+      'jwk',
+      existingJwk,
+      algorithm,
+      true,
+      importedUsages,
+    );
+
+    return { privateJwk: existingJwk, privateKey: importedPrivateKey };
+  }
+
+  const keyPair = await webcrypto.subtle.generateKey(algorithm, true, generatedUsages);
+  const generatedPrivateJwk = await webcrypto.subtle.exportKey('jwk', keyPair.privateKey);
+
+  await writeJson(path, generatedPrivateJwk);
+  await chmod(path, 0o600);
+
+  return { privateJwk: generatedPrivateJwk, privateKey: keyPair.privateKey };
+}
+
+async function fileExists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function publicSigningJwkFromPrivate(privateJwk) {
+  const { kty, crv, x, y } = privateJwk;
+
+  return {
+    kty,
+    crv,
+    x,
+    y,
+    ext: true,
+    key_ops: ['verify'],
+  };
+}
+
+function publicMessageJwkFromPrivate(privateJwk) {
+  const { d: _d, key_ops: _keyOps, ...publicJwk } = privateJwk;
+
+  return {
+    ...publicJwk,
+    kty: publicJwk.kty ?? 'EC',
+    crv: publicJwk.crv ?? 'P-256',
+    ext: true,
+  };
 }
 
 function canonicalStringify(value) {
